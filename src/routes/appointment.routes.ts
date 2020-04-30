@@ -33,7 +33,7 @@ appointmentsRouter.post('/', async (request, response) => {
 appointmentsRouter.get('/', async (request, response) => {
   const appointmentsRepository = getCustomRepository(AppointmentRepository);
   const appointments = await appointmentsRepository.find();
-  console.log(request.user);
+
   return response.json(appointments);
 });
 
