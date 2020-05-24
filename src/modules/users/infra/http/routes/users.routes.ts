@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import { getRepository } from 'typeorm';
 import multer from 'multer';
-import CreatedUserService from '../services/CreatedUserService';
-import User from '../models/user';
+import uploadConfig from '@config/upload';
+import CreatedUserService from '@modules/users/services/CreatedUserService';
+import User from '@modules/users/infra/typeorm/entities/user';
+import UpdateUserAvatar from '@modules/users/services/UpdateUserAvatarService';
 import ensureAuthenticatied from '../middlewares/ensureAuthenticatied';
-import uploadConfig from '../config/upload';
-import UpdateUserAvatar from '../services/UpdateUserAvatarService';
 
 const usersRoutes = Router();
 const upload = multer(uploadConfig);
@@ -47,7 +47,11 @@ usersRoutes.get('/', async (request, response) => {
   const repository = getRepository(User);
   const users = await repository.find();
 
-  return response.json(users);
+  const userNotPassword = users.filter(user => {
+    const { avatar, email, name, created_at, id, updated_at } = user;
+    return { newUser: { avatar, email, name, created_at, id, updated_at } };
+  });
+  return response.json(userNotPassword);
 });
 
 export default usersRoutes;

@@ -1,14 +1,17 @@
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 
-import routes from './routes';
-import uploadConfig from './config/upload';
+import cors from 'cors';
 
-import './database';
-import appError from './errors/AppError';
+import uploadConfig from '@config/upload';
+import appError from '@shared/errors/AppError';
+import routes from './routes';
+
+import '@shared/infra/typeorm';
 import 'reflect-metadata';
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.directory));
 app.use(routes);
