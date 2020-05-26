@@ -1,10 +1,9 @@
 import { Router } from 'express';
-import { getRepository } from 'typeorm';
 import multer from 'multer';
 import uploadConfig from '@config/upload';
 import CreatedUserService from '@modules/users/services/CreatedUserService';
-import User from '@modules/users/infra/typeorm/entities/user';
 import UpdateUserAvatar from '@modules/users/services/UpdateUserAvatarService';
+import { container } from 'tsyringe';
 import ensureAuthenticatied from '../middlewares/ensureAuthenticatied';
 
 const usersRoutes = Router();
@@ -13,7 +12,7 @@ const upload = multer(uploadConfig);
 usersRoutes.post('/', async (request, response) => {
   const { name, email, password } = request.body;
 
-  const createUser = new CreatedUserService();
+  const createUser = container.resolve(CreatedUserService);
 
   const user = await createUser.execute({
     name,
@@ -31,7 +30,7 @@ usersRoutes.patch(
   ensureAuthenticatied,
   upload.single('avatar'),
   async (request, response) => {
-    const updateUserAvatar = new UpdateUserAvatar();
+    const updateUserAvatar = container.resolve(UpdateUserAvatar);
     const user = await updateUserAvatar.execute({
       user_id: request.user.id,
       avatarFilename: request.file.filename,
@@ -42,16 +41,5 @@ usersRoutes.patch(
     return response.json(user);
   }
 );
-
-usersRoutes.get('/', async (request, response) => {
-  const repository = getRepository(User);
-  const users = await repository.find();
-
-  const userNotPassword = users.filter(user => {
-    const { avatar, email, name, created_at, id, updated_at } = user;
-    return { newUser: { avatar, email, name, created_at, id, updated_at } };
-  });
-  return response.json(userNotPassword);
-});
 
 export default usersRoutes;
