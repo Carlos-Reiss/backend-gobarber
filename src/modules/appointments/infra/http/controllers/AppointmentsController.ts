@@ -10,6 +10,7 @@ export default class AppointmentsController {
    */
   public async create(request: Request, response: Response): Promise<Response> {
     const { provider_id, date } = request.body;
+    const user_id = request.user.id;
 
     const parsedDate = parseISO(date);
 
@@ -18,6 +19,7 @@ export default class AppointmentsController {
     const appointment = await createAppointment.execute({
       provider_id,
       date: parsedDate,
+      user_id,
     });
 
     return response.json(appointment);
