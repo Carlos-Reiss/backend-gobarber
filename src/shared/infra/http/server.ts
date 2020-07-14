@@ -18,7 +18,6 @@ app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(routes);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
-  /*  4 parametros pois é um middleware */
   if (err instanceof appError) {
     return response
       .status(err.statusCode)
@@ -33,5 +32,5 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
 const port = 3333;
 
 app.listen(port, () => {
-  console.log(`✔ server started on port: ${port} !`);
+  console.log(`🚀 server started on port: ${port} !`);
 });
