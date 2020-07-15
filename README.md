@@ -15,9 +15,9 @@ Atualização do curso **GoStack** utilizando novas tecnologias, mudança de jav
 
 - Utilizar Mailtrap para envio de e-mails em desenvolvimento;
 - Utilizar Amazom SES para envios em produção;
-- O envio de e-mails deve aconceter em segundo plano(background job);
+- O envio de e-mails deve acontecer em segundo plano(background job);
 
-**RN(regras de negocios)**
+**RN(regras de negócios)**
 
 - O link enviado por email para resetar senha, deve expirar em 2h;
 - O usuário precisa confirmar a nova senha ao resetar sua senha;
@@ -31,8 +31,8 @@ Atualização do curso **GoStack** utilizando novas tecnologias, mudança de jav
 **RN**
 
 - O usuário não pode alterar seu email para um email já utilizado;
-- Para atualizar sua senha, o usuario deve informar a senha antiga;
-- Para atualizar sua senha, o usuario precisa a nova senha;
+- Para atualizar sua senha, o usuário deve informar a senha antiga;
+- Para atualizar sua senha, o usuário precisa a nova senha;
 
 
 # Painel do Prestador
@@ -57,9 +57,9 @@ Atualização do curso **GoStack** utilizando novas tecnologias, mudança de jav
 
 **RF**
 
-- O usuário deve poder listar todos os pretadores de serviços cadastrados;
+- O usuário deve poder listar todos os prestadores de serviços cadastrados;
 - O usuário deve poder listar os dias de um mês com pelo menos um horário disponível de um prestador;
-- O usuário deve poder listar horários disponiveis em um dia específico de um prestador;
+- O usuário deve poder listar horários disponíveis em um dia específico de um prestador;
 - O usuário deve poder realizar um novo agendamento com um prestador;
 
 **RNF**
