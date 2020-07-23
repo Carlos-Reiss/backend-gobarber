@@ -8,7 +8,7 @@ export default class ProvidersDayAvailabilityController {
    * index
    */
   public async index(request: Request, response: Response): Promise<Response> {
-    const { month, year, day } = request.body;
+    const { month, year, day } = request.query;
     const { provider_id } = request.params;
 
     const listProviderDayAvailability = container.resolve(
@@ -16,10 +16,10 @@ export default class ProvidersDayAvailabilityController {
     );
 
     const availability = await listProviderDayAvailability.execute({
-      month,
+      month: Number(month),
       provider_id,
-      year,
-      day,
+      year: Number(year),
+      day: Number(day),
     });
 
     return response.json(availability);
