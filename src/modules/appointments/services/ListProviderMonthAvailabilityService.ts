@@ -1,5 +1,5 @@
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
-import { getDaysInMonth, getDate, isAfter, isBefore } from 'date-fns';
+import { getDaysInMonth, getDate, isAfter } from 'date-fns';
 import { injectable, inject } from 'tsyringe';
 
 interface IRequest {
